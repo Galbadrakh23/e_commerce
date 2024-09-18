@@ -1,7 +1,6 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { CiHeart } from "react-icons/ci";
 import { Search, Heart, ShoppingCart } from "lucide-react";
 
 const Header = () => {
