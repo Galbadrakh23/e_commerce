@@ -5,20 +5,25 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import authRoute from "./routes/auth-routes";
+import { connectDB } from "./config/db";
 
 // express application create
 const app = express();
 
 //middlewares
+app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 
-const PORT = process.env.PORT;
+const PORT: string = process.env.PORT || "";
+const MONGO_URI = process.env.MONGO_URI || "";
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome E-commerce API Server");
 });
 
 //Server on
+
+connectDB(MONGO_URI);
 
 app.listen(PORT, () => {
   console.log(`АPI Server is running on port:${PORT}`);
