@@ -9,7 +9,7 @@ interface IUser {
   role: String;
   phonenumber: String;
   profile_img: String;
-  adress: String;
+  address: String;
   updated_at: Date;
   created_at: Date;
 }
@@ -47,7 +47,7 @@ const userSchema = new Schema<IUser>({
     default:
       "https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg",
   },
-  adress: String,
+  address: String,
   updated_at: {
     type: Date,
     default: Date.now,

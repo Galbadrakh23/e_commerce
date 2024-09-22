@@ -3,11 +3,11 @@ import User from "../models/user.models";
 
 //MONGOOSE ODM ⇒ Object Data Mapping
 
-export const signup = async (req: Request, res: Response) => {
+export const signUp = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { firstname, lastname, email, password, address } = req.body;
 
-    if (!name || !email || !password) {
+    if (!firstname || !lastname || !email || !password || !address) {
       res.status(404).json({ message: "Хоосон утга байж болохгүй" });
     }
 
@@ -15,10 +15,14 @@ export const signup = async (req: Request, res: Response) => {
     // Password hash
 
     const createdUser = await User.create({
-      name,
+      firstname,
+      lastname,
       email,
       password,
       phonenumber: "",
+      role: "user",
+      profile_img: "",
+      address: "",
     });
     res.status(201).json({ message: "Success", user: createdUser });
   } catch (error) {

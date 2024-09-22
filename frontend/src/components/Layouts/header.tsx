@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { Search, Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -38,18 +39,22 @@ const Header = () => {
               <ShoppingCart />
             </span>
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                className="border-[#2563EB] rounded-full text-[#FFFFFF]"
-              >
-                Бүртгүүлэх
-              </Button>
-              <Button
-                className="bg-[#2563EB] rounded-full"
-                variant="destructive"
-              >
-                Нэвтрэх
-              </Button>
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  className="border-[#2563EB] rounded-full text-[#FFFFFF]"
+                >
+                  Бүртгүүлэх
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button
+                  className="bg-[#2563EB] rounded-full"
+                  variant="destructive"
+                >
+                  Нэвтрэх
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
