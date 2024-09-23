@@ -34,24 +34,28 @@ export const signUp = async (req: Request, res: Response) => {
       .json({ message: "Server Error... Something went wrong", error });
   }
 };
-
 export const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  const [user] = await User.where({ email });
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
-  console.log("UserData", user);
-
-  if (!user) {
-    return res.status(400).json({ message: "User not Found" });
-  } else {
-    const isCheck = bcrypt.compareSync(password, password);
-    if (!isCheck) {
-      res.status(400).json({ message: "Password incorrect" });
-    } else {
-      const token = jwt.sign({}, "JWT_TOKEN_PASS@123", {
-        expiresIn: "24h",
-      });
-      res.status(200).json({ message: "Login Success", token });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
     }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (!isValidPassword) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign({ userId: user._id }, "JWT_TOKEN_PASS@123", {
+      expiresIn: "1h",
+    });
+
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };

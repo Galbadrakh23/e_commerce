@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { toast } from "react-toastify";
-// import { apiUrl } from "@/utils/util";
+import { apiUrl } from "@/utils/util";
 
 const Login = () => {
   const router = useRouter();
@@ -17,24 +16,18 @@ const Login = () => {
   const logIn = async () => {
     const { email, password } = userData;
     try {
-      const response = await axios.post(
-        `http://localhost:8000/api/v1/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${apiUrl}/api/v1/auth/login`, {
+        email,
+        password,
+      });
 
       if (response.status === 200) {
-        toast.success("User successfully signed in", { autoClose: 1000 });
         const { token } = response.data;
         localStorage.setItem("token", token);
-
         router.push("/");
       }
     } catch (error) {
-      console.error("There was an error signing in:", error);
-      toast.error("Failed to sign in. Please try again.");
+      console.error("Нэвтрэх алдаа гарлаа:", error);
     }
   };
 
