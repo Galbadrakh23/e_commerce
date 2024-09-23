@@ -39,7 +39,7 @@ const Header = () => {
               <ShoppingCart />
             </span>
             <div className="flex gap-2">
-              <Link href="/login">
+              <Link href="/signup">
                 <Button
                   variant="outline"
                   className="border-[#2563EB] rounded-full text-[#FFFFFF]"
@@ -47,7 +47,7 @@ const Header = () => {
                   Бүртгүүлэх
                 </Button>
               </Link>
-              <Link href="/signup">
+              <Link href="/login">
                 <Button
                   className="bg-[#2563EB] rounded-full"
                   variant="destructive"

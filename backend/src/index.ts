@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-
+import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -11,6 +11,7 @@ import { connectDB } from "./config/db";
 const app = express();
 
 //middlewares
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 

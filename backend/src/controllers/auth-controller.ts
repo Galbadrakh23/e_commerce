@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import User from "../models/user.models";
-
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 //MONGOOSE ODM ⇒ Object Data Mapping
 
 export const signUp = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, email, password, address } = req.body;
+    const { firstname, lastname, email, password } = req.body;
 
-    if (!firstname || !lastname || !email || !password || !address) {
-      res.status(404).json({ message: "Хоосон утга байж болохгүй" });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!firstname || !lastname || !email || !password) {
+      return res.status(404).json({ message: "Хоосон утга байж болохгүй" });
     }
 
     // Бүгд утгатай байвал
@@ -18,7 +21,7 @@ export const signUp = async (req: Request, res: Response) => {
       firstname,
       lastname,
       email,
-      password,
+      password: hashedPassword,
       phonenumber: "",
       role: "user",
       profile_img: "",
@@ -32,6 +35,23 @@ export const signUp = async (req: Request, res: Response) => {
   }
 };
 
-export const login = (req: Request, res: Response) => {
-  res.status(200).json({ message: "Login Success" });
+export const login = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const [user] = await User.where({ email });
+
+  console.log("UserData", user);
+
+  if (!user) {
+    return res.status(400).json({ message: "User not Found" });
+  } else {
+    const isCheck = bcrypt.compareSync(password, password);
+    if (!isCheck) {
+      res.status(400).json({ message: "Password incorrect" });
+    } else {
+      const token = jwt.sign({}, "JWT_TOKEN_PASS@123", {
+        expiresIn: "24h",
+      });
+      res.status(200).json({ message: "Login Success", token });
+    }
+  }
 };
