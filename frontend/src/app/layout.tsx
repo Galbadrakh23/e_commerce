@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/Layouts/header";
 import Footer from "@/components/Layouts/footer";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
+        <Toaster position="top-right" richColors />
         {children}
         <Footer />
       </body>

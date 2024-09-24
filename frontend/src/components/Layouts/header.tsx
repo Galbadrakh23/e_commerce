@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { Search, Heart, ShoppingCart } from "lucide-react";
+import { Search, Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 
 const Header = () => {
@@ -38,6 +38,8 @@ const Header = () => {
             <span className="text-[#FFFFFF]">
               <ShoppingCart />
             </span>
+
+            {/* SignUp & Login */}
             <div className="flex gap-2">
               <Link href="/signup">
                 <Button
@@ -54,6 +56,12 @@ const Header = () => {
                 >
                   Нэвтрэх
                 </Button>
+              </Link>
+            </div>
+            {/* User logo */}
+            <div className="text-[#FFFFFF]">
+              <Link href="/profile">
+                <User />
               </Link>
             </div>
           </div>

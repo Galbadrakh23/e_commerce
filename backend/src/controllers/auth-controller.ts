@@ -8,8 +8,6 @@ export const signUp = async (req: Request, res: Response) => {
   try {
     const { firstname, lastname, email, password } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     if (!firstname || !lastname || !email || !password) {
       return res.status(404).json({ message: "Хоосон утга байж болохгүй" });
     }
@@ -21,11 +19,7 @@ export const signUp = async (req: Request, res: Response) => {
       firstname,
       lastname,
       email,
-      password: hashedPassword,
-      phonenumber: "",
-      role: "user",
-      profile_img: "",
-      address: "",
+      password,
     });
     res.status(201).json({ message: "Success", user: createdUser });
   } catch (error) {
@@ -34,26 +28,25 @@ export const signUp = async (req: Request, res: Response) => {
       .json({ message: "Server Error... Something went wrong", error });
   }
 };
+
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Хэрэглэгч бүртгэлгүй байна." });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Нууц үг эсвэл имэйл буруу." });
     }
-
     const token = jwt.sign({ userId: user._id }, "JWT_TOKEN_PASS@123", {
       expiresIn: "1h",
     });
-
-    res.json({ token });
+    res.status(200).json({ message: "Амжилттай нэвтэрлээ", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

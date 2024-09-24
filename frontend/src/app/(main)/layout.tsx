@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Layouts/footer";
 import Navbar from "@/components/Layouts/navbar";
 
 export const metadata: Metadata = {
@@ -12,12 +11,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className="bg-background text-foreground">
-        <Navbar />
-        {children}
-      </body>
-    </html>
-  );
+  return <div>{children}</div>;
 }
