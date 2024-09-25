@@ -7,16 +7,15 @@ import axios from "axios";
 import { apiUrl } from "@/utils/util";
 import { toast } from "sonner";
 
-const Login = () => {
+const Forget = () => {
   console.log("API_URL", apiUrl);
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
-    password: "",
   });
 
-  const logIn = async () => {
-    const { email, password } = userData;
+  const sendEmail = async () => {
+    const { email } = userData;
     const promise = () =>
       new Promise((resolve) =>
         setTimeout(() => resolve({ name: "Sonner" }), 2000)
@@ -25,7 +24,6 @@ const Login = () => {
     try {
       const response = await axios.post(`${apiUrl}/api/v1/auth/login`, {
         email,
-        password,
       });
 
       if (response.status === 200) {
@@ -35,15 +33,15 @@ const Login = () => {
         toast.promise(promise, {
           loading: "Loading...",
           success: () => {
-            return ` Login success`;
+            return `Нэг удаагийн код амжилттай илгээлээ`;
           },
           error: "Error",
         });
-        router.push("/profile");
+        router.push("/otp");
       }
     } catch (error) {
-      console.error("Нэвтрэх алдаа гарлаа:", error);
-      toast.error("Нэвтрэх алдаа");
+      console.error("Буруу и-мэйл:", error);
+      toast.error("И-мэйл буруу байна");
     }
   };
 
@@ -55,34 +53,27 @@ const Login = () => {
             Нууц үг сэргээх
           </h2>
 
-          <div className="mb-4">
+          <div className="mb-4 mt-10">
             <label className="block text-gray-700 text-sm font-medium mb-2"></label>
             <input
               type="email"
               id="email"
               className="w-full px-4 py-2 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Имэйл хаяг"
+              placeholder="Имэйл хаяг оруулах"
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }
             />
           </div>
           <div className="mt-4 text-center">
-            <a
-              href="#"
-              className="text-sm text-gray-400 hover:underline underline"
-            >
-              Нууц үг мартсан
-            </a>
+            <button className="w-full bg-blue-600 text-white py-2 rounded-full font-medium hover:bg-blue-700 transition duration-200">
+              Илгээх
+            </button>
           </div>
-          <Link
-            href="/signup"
-            className="flex justify-center items-center"
-          ></Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Forget;

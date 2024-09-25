@@ -1,10 +1,34 @@
-import React from "react";
+"use client";
+
+import React, { useContext, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { Search, Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { UserContext } from "@/context/user-context";
 
 const Header = () => {
+  const { token, setToken } = useContext(UserContext);
+  const router = useRouter();
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
+  useEffect(() => {
+    const ss = localStorage.getItem("token") || "";
+    setToken(ss);
+  }, []);
+
   return (
     <header>
       <div className="w-full bg-black py-4 px-6">
@@ -38,32 +62,51 @@ const Header = () => {
             <span className="text-[#FFFFFF]">
               <ShoppingCart />
             </span>
-
-            {/* SignUp & Login */}
-            <div className="flex gap-2">
-              <Link href="/signup">
-                <Button
-                  variant="outline"
-                  className="border-[#2563EB] rounded-full text-[#FFFFFF]"
-                >
-                  Бүртгүүлэх
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button
-                  className="bg-[#2563EB] rounded-full"
-                  variant="destructive"
-                >
-                  Нэвтрэх
-                </Button>
-              </Link>
-            </div>
-            {/* User logo */}
-            <div className="text-[#FFFFFF]">
-              <Link href="/profile">
-                <User />
-              </Link>
-            </div>
+            {token ? (
+              <div className="text-[#FFFFFF]">
+                <Link href="/profile">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <User />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                      <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                      <DropdownMenuItem>Card</DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Link
+                          href="/"
+                          onClick={() => localStorage.removeItem("token")}
+                        >
+                          Logout
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </Link>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <Link href="/signup">
+                  <Button
+                    variant="outline"
+                    className="border-[#2563EB] rounded-full text-[#FFFFFF]"
+                  >
+                    Бүртгүүлэх
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button
+                    className="bg-[#2563EB] rounded-full"
+                    variant="destructive"
+                  >
+                    Нэвтрэх
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

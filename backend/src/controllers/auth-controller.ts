@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import User from "../models/user.models";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { generateToken } from "../util/jwt";
+
 //MONGOOSE ODM ⇒ Object Data Mapping
 
 export const signUp = async (req: Request, res: Response) => {
@@ -42,11 +43,13 @@ export const login = async (req: Request, res: Response) => {
 
     if (!isValidPassword) {
       return res.status(401).json({ message: "Нууц үг эсвэл имэйл буруу." });
+    } else {
+      const token = generateToken({ id: user._id });
+      res.status(200).json({
+        message: "Амжилттай нэвтэрлээ",
+        token,
+      });
     }
-    const token = jwt.sign({ userId: user._id }, "JWT_TOKEN_PASS@123", {
-      expiresIn: "1h",
-    });
-    res.status(200).json({ message: "Амжилттай нэвтэрлээ", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
