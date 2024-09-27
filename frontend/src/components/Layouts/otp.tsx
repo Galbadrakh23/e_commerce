@@ -7,17 +7,15 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { useRouter } from "next/navigation";
-// import { EmailIcon } from "@/icons";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { apiUrl } from "@/utils/util";
 import axios from "axios";
 
-const Otp = () => {
+const Otp = ({ email }) => {
   const router = useRouter();
   const [countDown, setCountDown] = useState(30);
   const [otpValue, setOtpValue] = useState("");
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (countDown > 0) {
@@ -52,9 +50,9 @@ const Otp = () => {
   };
   return (
     <div className="h-[calc(100vh-350px)] flex flex-col items-center mt-24">
-      {/**<EmailIcon />**/}
+      <img src="/assets/email.svg" alt="" />
       <h1 className="mt-7 text-2xl font-bold">Баталгаажуулах</h1>
-      <p className="mt-2 mb-6 text-text-primary">{`"${email}"`}</p>
+      <p className="mt-2 mb-6 text-text-primary">{`"${email}"хаягт илгээсэн баталгаажуулах кодыг оруулна уу`}</p>
       <div className="flex flex-col gap-4 text-sm">
         <InputOTP maxLength={4} value={otpValue} onChange={handleConfirmOtp}>
           <InputOTPGroup className="bg-white">

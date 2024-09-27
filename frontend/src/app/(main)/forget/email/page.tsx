@@ -1,39 +1,41 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 import { ChangeEvent, useState } from "react";
 import { toast } from "sonner";
 import Otp from "@/components/Layouts/otp";
+import Loader from "@/components/Layouts/loader";
 
-const Email = () => {
+const Email = ({}) => {
   const [email, setEmail] = useState("");
   const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
   const handleSendOtp = async () => {
-    console.log(email);
+    setIsLoading(true);
     try {
       const res = await axios.post(`${apiUrl}/api/v1/auth/forget-password`, {
         email,
       });
       if (res.status === 200) {
         setStep(step + 1);
-        toast.success("И-мэйл илгээлээ");
+        toast.success("И-мэйл амжилттай илгээлээ");
       }
     } catch (error) {
       toast.error("И-мэйл буруу байна");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="h-[calc(100vh-350px)] flex flex-col items-center">
-      {step === 1 && (
+      {step === 1 && !isLoading && (
         <div>
           <div className="flex items-start justify-center">
             <div className="max-w-md w-full">
@@ -63,10 +65,11 @@ const Email = () => {
           </div>
         </div>
       )}
+      {isLoading && <Loader />}
 
       {step === 2 && (
         <>
-          <Otp />
+          <Otp email={email} />
         </>
       )}
     </div>
