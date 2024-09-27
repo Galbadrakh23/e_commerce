@@ -11,6 +11,9 @@ interface IUser {
   phonenumber: String;
   profile_img: String;
   address: String;
+  otp: String;
+  passwordResetToken: String;
+  passwordResetTokenExpire: Date;
   updated_at: Date;
   created_at: Date;
 }
@@ -49,6 +52,18 @@ const userSchema = new Schema<IUser>({
       "https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg",
   },
   address: String,
+  otp: {
+    type: String,
+    default: "",
+  },
+  passwordResetTokenExpire: {
+    type: Date,
+    default: undefined,
+  },
+  passwordResetToken: {
+    type: String,
+    default: "",
+  },
   updated_at: {
     type: Date,
     default: Date.now,

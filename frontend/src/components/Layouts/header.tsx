@@ -55,7 +55,7 @@ const Header = () => {
             />
           </div>
 
-          <div className="pr-10 flex gap-6 items-center">
+          <div className="pr-10 flex gap-6 items-center justify-center">
             <span className="text-[#FFFFFF]">
               <Heart />
             </span>
@@ -63,29 +63,25 @@ const Header = () => {
               <ShoppingCart />
             </span>
             {token ? (
-              <div className="text-[#FFFFFF]">
-                <Link href="/profile">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      <User />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
+              <div className="text-[#FFFFFF] mt-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <User />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link href="/profile">
                       <DropdownMenuItem>Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Wishlist</DropdownMenuItem>
-                      <DropdownMenuItem>Card</DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Link
-                          href="/"
-                          onClick={() => localStorage.removeItem("token")}
-                        >
-                          Logout
-                        </Link>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </Link>
+                    </Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                    <DropdownMenuItem>Card</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <button onClick={logOut}>Гарах</button>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
               <div className="flex gap-2">

@@ -26,12 +26,11 @@ const productSchema = new Schema<IProduct>(
       type: String,
       default: "comment",
     },
-    size: {
-      type: String,
-      enum: ["XS", "S", "M", "L", "XL", "XXL"],
-      default: "S",
+    size: { type: String, enum: ["S", "L", "M", "XL", "XXL"], default: "S" },
+    images: {
+      type: [String],
+      default: ["img"],
     },
-    images: [String],
     isNew: { type: Boolean, default: true },
     quantity: { type: Number, required: true },
     discount: { type: Number, default: 0 },
