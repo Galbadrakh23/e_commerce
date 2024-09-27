@@ -13,11 +13,15 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async (email: string, otp: string) => {
+  const rdmOTP = Math.floor(Math.random() * 10_000)
+    .toString()
+    .padStart(4, "0");
+
   const info = await transporter.sendMail({
     from: process.env.EMAIL_FROM_USER, // sender address
     to: "galbadrakh223@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
+    subject: "И-мэйл сэргээх нууц үг", // Subject line
     text: "Hello world?", // plain text body
-    // html: generateHTMLTemplate(rdmOTP), // html body
+    html: generateHTMLTemplate(rdmOTP), // html body
   });
 };

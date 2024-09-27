@@ -35,9 +35,9 @@ const Email = () => {
     <div className="h-[calc(100vh-350px)] flex flex-col items-center">
       {step === 1 && (
         <div>
-          <div className="bg-[#F7F7F8] flex items-start justify-center">
-            <div className="p-8 max-w-md w-full">
-              <h2 className="text-2xl font-semibold text-center mt-64">
+          <div className="flex items-start justify-center">
+            <div className="max-w-md w-full">
+              <h2 className="text-2xl font-semibold text-center mt-28">
                 Нууц үг сэргээх
               </h2>
 
@@ -46,13 +46,16 @@ const Email = () => {
                 <input
                   type="email"
                   id="email"
-                  className="w-full px-4 py-2 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-[334px] px-4 py-2 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-left"
                   placeholder="Имэйл хаяг оруулах"
                   onChange={handleEmail}
                 />
               </div>
               <div className="mt-4 text-center">
-                <button className="w-full bg-blue-600 text-white py-2 rounded-full font-medium hover:bg-blue-700 transition duration-200">
+                <button
+                  onClick={handleSendOtp}
+                  className="w-full bg-blue-600 text-white py-2 rounded-full font-medium hover:bg-blue-700 transition duration-200"
+                >
                   Илгээх
                 </button>
               </div>

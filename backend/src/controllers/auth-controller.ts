@@ -43,7 +43,7 @@ export const login = async (req: Request, res: Response) => {
 
     if (!user) {
       return res
-        .status(404)
+        .status(400)
         .json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
     } else {
       const isCheck = bcrypt.compareSync(password, user.password.toString());
@@ -61,6 +61,7 @@ export const login = async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(400).json({ message: "Client error" });
+    console.log("Алдаа", error);
   }
 };
 

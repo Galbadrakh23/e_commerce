@@ -87,7 +87,7 @@ const Login = () => {
           </button>
           <div className="mt-4 text-center">
             <a
-              href="forget"
+              href="forget/email"
               className="text-sm text-gray-400 hover:underline underline"
             >
               Нууц үг мартсан
