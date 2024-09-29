@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { apiUrl } from "@/utils/util";
 import axios from "axios";
 
-const Otp = ({ email }) => {
+const Otp = ({ email }: { email: string }) => {
   const router = useRouter();
   const [countDown, setCountDown] = useState(30);
   const [otpValue, setOtpValue] = useState("");

@@ -136,3 +136,11 @@ export const verifyPassword = async (req: Request, res: Response) => {
   await findUser.save();
   res.status(200).json({ message: "Password changed successfully" });
 };
+export const updateUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+  res.status(200).json({
+    message: "Хэрэглэгчийн мэдээлэл амжилттай шинэчлэгдлээ.",
+    updatedUser,
+  });
+};
