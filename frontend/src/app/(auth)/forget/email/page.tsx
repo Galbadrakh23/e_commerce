@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react";
 import { toast } from "sonner";
 import Otp from "@/components/Layouts/otp";
 import Loader from "@/components/Layouts/loader";
+import NewPass from "@/components/Layouts/newpass";
 
 const Email = ({}) => {
   const [email, setEmail] = useState("");

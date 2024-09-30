@@ -65,11 +65,11 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-// export const currentUser = async (req: Request, res: Response) => {
-//   const { id } = req.user;
-//     const findUser = await User.findById(id);
-//     res.status(200).json({ user: findUser, message: "success" });
-// };
+export const currentUser = async (req: Request, res: Response) => {
+  const { id }: any = req.user;
+  const findUser = await User.findById(id);
+  res.status(200).json({ user: findUser, message: "Success" });
+};
 
 export const forgetPassword = async (req: Request, res: Response) => {
   try {
@@ -82,38 +82,49 @@ export const forgetPassword = async (req: Request, res: Response) => {
         .json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
     }
 
-    const otp = Math.floor(Math.random() * 1000)
+    const otp = Math.floor(Math.random() * 10_000)
       .toString()
       .padStart(4, "0");
     findUser.otp = otp;
+    console.log("OTP", otp);
     await findUser.save();
     await sendEmail(email, otp);
     res.status(200).json({ message: "OTP code is sent to your email" });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const verifyOtp = async (req: Request, res: Response) => {
   const { email, otpValue } = req.body;
+  try {
+    console.log("Email , OTP", email, otpValue);
+    const findUser = await User.findOne({ email: email, otp: otpValue });
+    if (!findUser) {
+      return res
+        .status(400)
+        .json({ message: "Бүртгэлтэй хэрэглэгч эсвэл OTP код олдсонгүй" });
+    }
 
-  const findUser = await User.findOne({ email: email, otp: otpValue });
-  if (!findUser) {
-    return res.status(400).json({ message: "Invalid OTP" });
+    //sendEmail
+    const resetToken = crypto.randomBytes(25).toString("hex");
+    const hashedResetToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+    findUser.passwordResetToken = hashedResetToken;
+    findUser.passwordResetTokenExpire = new Date(Date.now() + 10 * 60 * 1000);
+    await findUser.save();
+
+    console.log("RT", resetToken);
+    await sendEmail(
+      email,
+      `<a href="http://localhost:3000/forget/newpass?resettoken=${resetToken}"&email=${email}>Нууц үг сэргээх холбоос</a>`
+    );
+    res.status(200).json({ message: "OTP code is sent to your email" });
+  } catch (error) {
+    console.log("OTP", error);
   }
-
-  //sendEmail
-  const resetToken = crypto.randomBytes(25).toString("hex");
-  const hashedResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-  findUser.passwordResetToken = hashedResetToken;
-  findUser.passwordResetTokenExpire = new Date(Date.now() + 10 * 60 * 1000);
-  await findUser.save();
-  await sendEmail(
-    email,
-    `<a href="http://localhost:3000/forgetpass/newpass?resettoken="${resetToken}"">Reset password</a>`
-  );
-  res.status(200).json({ message: "OTP code is sent to your email" });
 };
 
 export const verifyPassword = async (req: Request, res: Response) => {
