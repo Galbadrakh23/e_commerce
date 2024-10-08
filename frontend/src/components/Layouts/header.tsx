@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { Search, Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/provider/user-provider";
+import { UserContext } from "@/context/user-context";
 
 import {
   DropdownMenu,
@@ -16,22 +16,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { UserContext } from "@/context/user-context";
 
 const Header = () => {
-  const { user } = useUser();
-  console.log("user", user);
-  // const { token, setToken } = useContext(UserContext);
-  // const router = useRouter();
-  // const logOut = () => {
-  //   localStorage.removeItem("token");
-  //   router.push("/login");
-  // };
+  const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   const ss = localStorage.getItem("token") || "";
-  //   setToken(ss);
-  // }, []);
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    router.push("/login");
+  };
+
   return (
     <header>
       <div className="w-full bg-black py-4 px-6">
@@ -65,28 +60,28 @@ const Header = () => {
             <span className="text-[#FFFFFF]">
               <ShoppingCart />
             </span>
-            {user && <img src={""} alt="'profile" />}
-            {!user && (
-              // <div className="text-[#FFFFFF] mt-2">
-              //   <DropdownMenu>
-              //     <DropdownMenuTrigger>
-              //       <User />
-              //     </DropdownMenuTrigger>
-              //     <DropdownMenuContent>
-              //       <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              //       <DropdownMenuSeparator />
-              //       <Link href="/profile">
-              //         <DropdownMenuItem>Profile</DropdownMenuItem>
-              //       </Link>
-              //       <DropdownMenuSeparator />
-              //       <DropdownMenuItem>Wishlist</DropdownMenuItem>
-              //       <DropdownMenuItem>Card</DropdownMenuItem>
-              //       <DropdownMenuItem>
-              //         <button onClick={logOut}>Гарах</button>
-              //       </DropdownMenuItem>
-              //     </DropdownMenuContent>
-              //   </DropdownMenu>
-              // </div>
+            {user ? (
+              <div className="text-[#FFFFFF] mt-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <User />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link href="/profile">
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                    <DropdownMenuItem>Card</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <button onClick={logOut}>Logout</button>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            ) : (
               <div className="flex gap-2">
                 <Link href="/signup">
                   <Button

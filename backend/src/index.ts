@@ -8,6 +8,7 @@ dotenv.config();
 import authRoute from "./routes/auth-routes";
 import categoryRoute from "./routes/category-routes";
 import producRoute from "./routes/product-route";
+import cartRoute from "./routes/cart-routes";
 import { connectDB } from "./config/db";
 
 import { generateHTMLTemplate } from "./util/generateHTMLTemplate";
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/", categoryRoute);
 app.use("/api/v1/products", producRoute);
+app.use("/api/v1/carts", cartRoute);
 
 const PORT: string = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";
