@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { Search, Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { UserContext } from "@/context/user-context";
+import { UserContext } from "@/components/context/user-context";
 
 import {
   DropdownMenu,

@@ -1,27 +1,33 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { ProductCard } from "@/components/card/card";
+import { CategoryLabel } from "@/components/caterogry/index";
+import { SizeLabel } from "@/components/caterogry/size_label";
+import React, { useContext } from "react";
+import { ProductContext } from "@/components/context/product_context";
 
-export default function Home() {
-  const [count, setCount] = useState<number>(0);
-
-  const minus = () => {
-    setCount(count - 1);
-  };
-  const add = () => {
-    setCount(count + 1);
-  };
-
+const CategoryPage = () => {
+  const { product } = useContext(ProductContext);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-3xl"> Category , E-commerce App </h1>
-      <div className="flex justify-center">
-        <Button onClick={minus}> - </Button>
-        <Label className="text-4xl mx-5">{count}</Label>
-        <Button onClick={add}> + </Button>
+    <div className="mt-16 mb-24 w-3/4 m-auto">
+      <div className="flex gap-32">
+        <aside className="flex flex-col gap-12">
+          <CategoryLabel />
+          <SizeLabel />
+        </aside>
+        <main className="grid grid-cols-3 gap-8 w-2/3 mx-auto">
+          {product?.map((c) => (
+            <ProductCard
+              name={c.name}
+              price={c.price}
+              _id={c._id}
+              discount={c.discount}
+            />
+          ))}
+        </main>
       </div>
     </div>
   );
-}
+};
+
+export default CategoryPage;
