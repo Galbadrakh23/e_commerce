@@ -10,7 +10,6 @@ import { CardProps } from "@/interface";
 
 export function ProductCard({ name, price, _id, discount }: CardProps) {
   const { product } = useContext(ProductContext);
-
   const currentPrice = price - Math.floor((price * discount) / 100);
 
   const options = { maximumFractionDigits: 2 };

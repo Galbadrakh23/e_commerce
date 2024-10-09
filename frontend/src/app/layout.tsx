@@ -5,6 +5,10 @@ import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import UserProvider from "@/provider/user-provider";
+import { ProfileProvider } from "@/components/context/profile_context";
+import { CategoryProvider } from "@/components/context/category-context";
+import { ProductProvider } from "@/components/context/product_context";
+import { CartProvider } from "@/components/context/cart_context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,10 +37,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <UserProvider>
-          <Header />
-          <Toaster position="top-right" richColors />
-          {children}
-          <Footer />
+          <ProfileProvider>
+            <CategoryProvider>
+              <ProductProvider>
+                <CartProvider>
+                  <Header />
+                  <Toaster position="top-right" richColors />
+                  {children}
+                  <Footer />
+                </CartProvider>
+              </ProductProvider>
+            </CategoryProvider>
+          </ProfileProvider>
         </UserProvider>
       </body>
     </html>

@@ -4,23 +4,33 @@ import React, { useState } from "react";
 const ProductDetail = () => {
   return (
     <div className="flex gap-5">
-      <aside className="flex flex-col gap-2 justify-center">
+      <aside className="flex flex-col gap-2 justify-start mt-24">
         <img
-          src="\images\girl.png"
+          src="/assets/wildflower.png"
+          alt=""
+          className="rounded w-20 hover:border border-black"
+        />
+        <img
+          src="/assets/wildflower.png"
           alt=""
           className="rounded w-14 hover:border border-black"
         />
         <img
-          src="\images\girl.png"
+          src="/assets/wildflower.png"
+          alt=""
+          className="rounded w-14 hover:border border-black"
+        />
+        <img
+          src="/assets/wildflower.png"
           alt=""
           className="rounded w-14 hover:border border-black"
         />
       </aside>
       <div>
         <img
-          src="/images/image.png"
+          src="/assets/wildflower.png"
           alt=""
-          className="rounded-2xl w-[420px] overflow-hidden "
+          className="rounded-xl w-[426px] overflow-hidden "
         />
       </div>
     </div>

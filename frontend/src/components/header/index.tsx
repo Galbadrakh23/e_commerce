@@ -36,12 +36,17 @@ const Header = () => {
               <span className="w-10">
                 <img src="./assets/Vector.svg" alt="logo" />
               </span>
-              <p className="text-[#FFFFFF] font-normal text-sm">ECOMMERCE</p>
+              <Link href="./" className="text-[#FFFFFF] font-normal text-sm">
+                ECOMMERCE
+              </Link>
             </div>
             <div>
-              <p className="text-[#FFFFFF] font-normal text-sm opacity-50">
+              <Link
+                href="./category"
+                className="text-[#FFFFFF] font-normal text-sm opacity-50"
+              >
                 Ангилал
-              </p>
+              </Link>
             </div>
           </div>
           <div className="relative flex items-center">
@@ -74,7 +79,9 @@ const Header = () => {
                     </Link>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Wishlist</DropdownMenuItem>
-                    <DropdownMenuItem>Card</DropdownMenuItem>
+                    <Link href="/product_detail">
+                      <DropdownMenuItem>Card</DropdownMenuItem>
+                    </Link>
                     <DropdownMenuItem>
                       <button onClick={logOut}>Logout</button>
                     </DropdownMenuItem>

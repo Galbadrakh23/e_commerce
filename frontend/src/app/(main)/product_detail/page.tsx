@@ -10,6 +10,7 @@ import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import { Heart } from "lucide-react";
 
 const ProductDetailPage = () => {
   const { product } = useContext(ProductContext);
@@ -47,10 +48,12 @@ const ProductDetailPage = () => {
       <div className="mt-16 mb-20 grid grid-cols-2 gap-5">
         <ProductDetail />
         <div className="flex flex-col gap-3 justify-end ">
-          <Badge className="bg-transparent text-black border border-black w-14 text-xs font-semibold">
+          <Badge className="bg-transparent text-black border border-blue-500 w-14 text-xs font-semibold">
             Шинэ
           </Badge>
-          <h2 className="font-bold text-2xl">Wildflower Hoodie</h2>
+          <h2 className="font-bold text-2xl flex flex-row items-center gap-4">
+            Wildflower Hoodie <Heart />
+          </h2>
           <p>Зэрлэг цэцгийн зурагтай даавуун цамц</p>
           <div className="flex flex-col gap-2 my-4">
             <p className="text-base underline">Хэмжээний загвар</p>
@@ -60,6 +63,15 @@ const ProductDetailPage = () => {
               </Button>
               <Button className="rounded-full bg-transparent border border-black text-black dark:text-white dark:border-white w-8 h-8">
                 M
+              </Button>
+              <Button className="rounded-full bg-transparent border border-black text-black dark:text-white dark:border-white w-8 h-8">
+                L
+              </Button>
+              <Button className="rounded-full bg-gray-700 border border-black text-black dark:text-white dark:border-white w-8 h-8">
+                XL
+              </Button>
+              <Button className="rounded-full bg-transparent border border-black text-black dark:text-white dark:border-white w-8 h-8">
+                2XL
               </Button>
             </div>
             <div className="mt-4">
@@ -80,7 +92,7 @@ const ProductDetailPage = () => {
           </div>
           <div className="mt-6 mb-14">
             <p className="text-xl font-bold mb-2">120,000₮</p>
-            <Button className="bg-[#2563EB]" size="lg">
+            <Button className="bg-[#2563EB] rounded-full px-8" size="sm">
               Сагсанд нэмэх
             </Button>
           </div>

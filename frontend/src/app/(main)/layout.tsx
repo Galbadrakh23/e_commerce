@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Layouts/navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",

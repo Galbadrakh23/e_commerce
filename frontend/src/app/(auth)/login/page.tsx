@@ -39,7 +39,7 @@ const Login = () => {
           },
           error: "Error",
         });
-        router.push("/profile");
+        router.push("/category");
       }
     } catch (error) {
       console.error("Нэвтрэх алдаа гарлаа:", error);
