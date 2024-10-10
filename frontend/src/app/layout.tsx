@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import UserProvider from "@/provider/user-provider";
+import { UserProvider } from "@/components/context/user-context";
 import { ProfileProvider } from "@/components/context/profile_context";
 import { CategoryProvider } from "@/components/context/category-context";
 import { ProductProvider } from "@/components/context/product_context";

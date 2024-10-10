@@ -1,15 +1,12 @@
 import { Request, Response } from "express";
 import Cart from "../models/cart.models";
 
-export const getUserCart = async (req: Request, res: Response) => {
-  const { id: userId } = req.params;
+export const getAllUserCart = async (req: Request, res: Response) => {
   try {
-    const carts = await Cart.findOne({ user: userId }).populate(
-      "products.product"
-    );
+    const AllCarts = await Cart.find({});
     res.status(200).json({
-      message: "Success to get cart",
-      carts,
+      message: "Success to get all cart",
+      AllCarts,
     });
   } catch (error) {
     console.log(error);
@@ -31,7 +28,7 @@ export const createCart = async (req: Request, res: Response) => {
         totalAmount,
       });
       return res.status(200).json({
-        message: "created new cart",
+        message: "Created new cart",
         cart,
       });
     }
@@ -48,7 +45,7 @@ export const createCart = async (req: Request, res: Response) => {
 
     const updatedCart = await findUserCart.save();
     res.status(200).json({
-      message: "updated cart",
+      message: "Updated cart",
       updatedCart,
     });
   } catch (error) {
@@ -64,13 +61,12 @@ export const deleteCart = async (req: Request, res: Response) => {
   try {
     const deletedCart = await Cart.findOneAndDelete({ user: userId });
     res.status(200).json({
-      message: "deleted cart",
-      deletedCart,
+      message: "Deleted Cart",
     });
   } catch (error) {
     console.log(error);
     res.status(400).json({
-      message: "failed to delete cart",
+      message: "Failed to delete Cart",
     });
   }
 };

@@ -6,6 +6,7 @@ import authRoute from "./routes/auth-routes";
 import categoryRoute from "./routes/category-routes";
 import producRoute from "./routes/product-route";
 import cartRoute from "./routes/cart-routes";
+import userRoute from "./routes/user-route";
 import { connectDB } from "./config/db";
 dotenv.config();
 
@@ -16,6 +17,7 @@ const app = express();
 //middlewares
 app.use(cors());
 app.use(express.json());
+app.use("/api/v1/users", userRoute);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/", categoryRoute);
 app.use("/api/v1/products", producRoute);

@@ -60,7 +60,9 @@ const Header = () => {
 
           <div className="pr-10 flex gap-6 items-center justify-center">
             <span className="text-[#FFFFFF]">
-              <Heart />
+              <Link href="/saved">
+                <Heart />
+              </Link>
             </span>
             <span className="text-[#FFFFFF]">
               <ShoppingCart />
@@ -74,11 +76,13 @@ const Header = () => {
                   <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <Link href="/profile">
+                    <Link href="/user_profile">
                       <DropdownMenuItem>Profile</DropdownMenuItem>
                     </Link>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                    <Link href="/saved">
+                      <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                    </Link>
                     <Link href="/product_detail">
                       <DropdownMenuItem>Card</DropdownMenuItem>
                     </Link>

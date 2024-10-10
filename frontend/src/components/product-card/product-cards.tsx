@@ -15,11 +15,11 @@ export const ProductCard = ({ name, price, image, discount }: Product) => {
         alt="image1"
         width={244}
         height={331}
-        className="rounded-lg"
+        className="rounded-2xl"
       />
-      <Heart size={22} strokeWidth={1} className="absolute top-4 right-4" />
+      <Heart size={22} strokeWidth={1} className="absolute top-2 right-2" />
       <div className="mt-2">
-        <h3 className="font-light">{name}</h3>
+        <h3 className="font-thin">{name}</h3>
         <PriceWithDiscount price={price} discount={discount} />
       </div>
     </div>
@@ -60,7 +60,7 @@ const PriceWithDiscount = ({
 }) => {
   const discountedPrice = getDiscountedPrice(price, discount);
   return (
-    <div className="flex items-center gap-4 mt-1">
+    <div className="flex items-center gap-4 mt-1 justify-between">
       <p className="font-bold">
         {formattedPrice(discount > 0 ? discountedPrice : price)}₮
       </p>

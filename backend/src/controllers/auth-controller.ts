@@ -7,6 +7,23 @@ import crypto from "crypto";
 
 //MONGOOSE ODM ⇒ Object Data Mapping
 
+interface iGetUserAuthInfoRequest extends Request {
+  user: any;
+}
+export const getCurrentUser = async (
+  req: iGetUserAuthInfoRequest,
+  res: Response
+) => {
+  try {
+    const { id }: any = req.user;
+    const data = await User.findById(id);
+    res.status(200).json({ user: data, message: "Success" });
+    console.log("Current User", data);
+  } catch (error) {
+    res.status(400).json({ message: "Error" });
+  }
+};
+
 export const signUp = async (req: Request, res: Response) => {
   try {
     const { firstname, lastname, email, password } = req.body;
@@ -63,12 +80,6 @@ export const login = async (req: Request, res: Response) => {
     res.status(400).json({ message: "Client error" });
     console.log("Алдаа", error);
   }
-};
-
-export const currentUser = async (req: Request, res: Response) => {
-  const { id }: any = req.user;
-  const findUser = await User.findById(id);
-  res.status(200).json({ user: findUser, message: "Success" });
 };
 
 export const forgetPassword = async (req: Request, res: Response) => {

@@ -8,7 +8,7 @@ const Wishlist = () => {
     <div className="my-5 ">
       <Card className="w- h-[132px] m-auto bg-white dark:bg-black p-4 flex justify-between">
         <div className="flex gap-6">
-          <img src="\images\girl.png" alt="" className="rounded-xl" />
+          <img src="/assets/chunky.png" alt="" className="rounded-xl" />
           <div className="flex flex-col justify-between">
             <p className="text-base">Chunky Glyph Tee</p>
             <p className="text-sm font-bold">120’000₮</p>
@@ -21,7 +21,7 @@ const Wishlist = () => {
             </Button>
           </div>
         </div>
-        <IoMdHeart className=" text-2xl" />
+        <IoMdHeart className=" text-xl" />
       </Card>
     </div>
   );

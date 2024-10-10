@@ -37,6 +37,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("token") || "";
+      // console.log("Token", token);
       const response = await axios.get(`${apiUrl}/api/v1/auth/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -44,21 +45,19 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       });
       if (response.status === 201) {
         const { user } = response.data;
-        console.log("USER", response.data);
         setUser(user);
+        setToken(token);
         setRefetch(!refetch);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
+  console.log("Logged User", user);
 
   useEffect(() => {
     fetchUserData();
-  }, []);
-
-  console.log("USER", user);
-
+  }, [token]);
   return (
     <UserContext.Provider
       value={{

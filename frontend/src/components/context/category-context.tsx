@@ -3,8 +3,6 @@ import React, { createContext, useEffect, useState } from "react";
 import { ICategory, CategoryContextType } from "@/interface";
 import { apiUrl } from "@/utils/util";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
 type CategoryProviderProps = {
   children: React.ReactNode;
@@ -22,16 +20,12 @@ export const CategoryProvider = ({ children }: CategoryProviderProps) => {
 
   const fetchCategoryData = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/api/v1/categories`);
+      const res = await axios.get(`${apiUrl}/api/v1/category`);
       if (res.status === 200) {
-        // toast.success("Get categories successfully");
-        // const { category } = res.data;
         setCategory(res.data.category);
-        // console.log("RESCAT", res.data.category);
       }
     } catch (error) {
       console.log("cant fetch category lists", error);
-      // toast.error("Failed to fetch category data");
     }
   };
 
@@ -39,7 +33,7 @@ export const CategoryProvider = ({ children }: CategoryProviderProps) => {
     fetchCategoryData();
   }, []);
 
-  console.log("CAT", category);
+  console.log("All Categories", category);
   return (
     <CategoryContext.Provider value={{ category, fetchCategoryData }}>
       {children}

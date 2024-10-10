@@ -5,13 +5,13 @@ import {
   forgetPassword,
   verifyOtp,
   verifyPassword,
-  currentUser,
+  getCurrentUser,
 } from "../controllers/auth-controller";
 import { authentication } from "../middlewares/auth";
 
 const router = Router();
 
-router.route("/current-user").get(authentication, currentUser);
+router.route("/user").get(authentication, getCurrentUser);
 router.route("/forget-password").post(forgetPassword);
 router.route("/verify-password").post(verifyPassword);
 router.route("/verify-otp").post(verifyOtp);

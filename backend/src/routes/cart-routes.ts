@@ -2,14 +2,14 @@ import { Router } from "express";
 
 import {
   createCart,
-  getUserCart,
+  getAllUserCart,
   deleteCart,
 } from "../controllers/cart-controller";
 
 const router = Router();
 
-router.route("/get-cart").get(getUserCart);
-router.route("/create-cart").post(createCart);
+router.route("/get-cart").get(getAllUserCart);
+router.route("/create-cart").post(createCart); // update
 router.route("/delete-cart").delete(deleteCart);
 
 export default router;

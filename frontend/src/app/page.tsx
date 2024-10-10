@@ -2,7 +2,7 @@ import { Hero } from "@/components/home";
 import {
   ProductCard,
   FeaturedProductCard,
-} from "@/components/Layouts/product-cards";
+} from "@/components/product-card/product-cards";
 import { products } from "@/lib/data";
 
 export default function Home() {
