@@ -3,9 +3,8 @@ import { Request, Response } from "express";
 import Category from "../models/category.models";
 
 export const getCategories = async (req: Request, res: Response) => {
-  const categories = await Category.find();
+  const categories = await Category.find({});
   res.json(categories);
-  console.log("All Category");
 };
 
 export const createCategory = async (req: Request, res: Response) => {

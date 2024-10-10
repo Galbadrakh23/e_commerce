@@ -18,7 +18,6 @@ export const getCurrentUser = async (
     const { id }: any = req.user;
     const data = await User.findById(id);
     res.status(200).json({ user: data, message: "Success" });
-    console.log("Current User", data);
   } catch (error) {
     res.status(400).json({ message: "Error" });
   }
