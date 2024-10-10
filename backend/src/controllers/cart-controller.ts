@@ -1,6 +1,24 @@
 import { Request, Response } from "express";
 import Cart from "../models/cart.models";
 
+export const getUserCart = async (req: Request, res: Response) => {
+  const { id: userId } = req.params;
+  try {
+    const carts = await Cart.findOne({ user: userId }).populate(
+      "products.product"
+    );
+    res.status(200).json({
+      message: "Success to get cart",
+      carts,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message: "failed to get cart",
+    });
+  }
+};
+
 export const createCart = async (req: Request, res: Response) => {
   const { userId, productId, totalAmount, quantity } = req.body;
   try {
@@ -37,6 +55,22 @@ export const createCart = async (req: Request, res: Response) => {
     console.log(error);
     res.status(400).json({
       message: "failed to read carts",
+    });
+  }
+};
+
+export const deleteCart = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const deletedCart = await Cart.findOneAndDelete({ user: userId });
+    res.status(200).json({
+      message: "deleted cart",
+      deletedCart,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message: "failed to delete cart",
     });
   }
 };

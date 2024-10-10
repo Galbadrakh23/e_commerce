@@ -2,14 +2,12 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 const nodemailer = require("nodemailer");
-
-dotenv.config();
-
 import authRoute from "./routes/auth-routes";
 import categoryRoute from "./routes/category-routes";
 import producRoute from "./routes/product-route";
 import cartRoute from "./routes/cart-routes";
 import { connectDB } from "./config/db";
+dotenv.config();
 
 import { generateHTMLTemplate } from "./util/generateHTMLTemplate";
 // express application create

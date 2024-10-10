@@ -1,11 +1,9 @@
 "use client";
-
-import { ProductCard } from "@/components/card/card";
 import { CategoryLabel } from "@/components/caterogry/index";
 import { SizeLabel } from "@/components/caterogry/size_label";
 import React, { useContext } from "react";
 import { ProductContext } from "@/components/context/product_context";
-
+import { ProductCard } from "@/components/card/card";
 const CategoryPage = () => {
   const { product } = useContext(ProductContext);
   return (

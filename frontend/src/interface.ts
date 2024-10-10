@@ -90,3 +90,9 @@ export interface CartContextType {
   setCartData: (cartData: ICart) => void;
   postCartData: () => void;
 }
+export interface ProductCard {
+  id: number;
+  image: string;
+  name: string;
+  price: string;
+}
