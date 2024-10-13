@@ -34,23 +34,25 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const router = useRouter();
 
+  /**
+   * Fetches user data from the server and updates the user state
+   * if the request is successful.
+   */
   const fetchUserData = async () => {
-    try {
-      const token = localStorage.getItem("token") || "";
-      // console.log("Token", token);
-      const response = await axios.get(`${apiUrl}/api/v1/auth/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 201) {
-        const { user } = response.data;
-        setUser(user);
-        setToken(token);
-        setRefetch(!refetch);
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const response = await axios.get(`${apiUrl}/api/v1/auth/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.status === 201) {
+          setUser(response.data.user);
+          setToken(token);
+          setRefetch(!refetch);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
     }
   };
   console.log("Logged User", user);
@@ -58,6 +60,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   useEffect(() => {
     fetchUserData();
   }, [token]);
+
   return (
     <UserContext.Provider
       value={{

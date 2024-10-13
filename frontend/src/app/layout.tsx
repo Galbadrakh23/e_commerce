@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -36,20 +37,27 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <UserProvider>
-          <ProfileProvider>
-            <CategoryProvider>
-              <ProductProvider>
-                <CartProvider>
-                  <Header />
-                  <Toaster position="top-right" richColors />
-                  {children}
-                  <Footer />
-                </CartProvider>
-              </ProductProvider>
-            </CategoryProvider>
-          </ProfileProvider>
-        </UserProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <UserProvider>
+            <ProfileProvider>
+              <CategoryProvider>
+                <ProductProvider>
+                  <CartProvider>
+                    <Header />
+                    <Toaster position="top-right" richColors />
+                    {children}
+                    <Footer />
+                  </CartProvider>
+                </ProductProvider>
+              </CategoryProvider>
+            </ProfileProvider>
+          </UserProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
