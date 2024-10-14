@@ -1,18 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { UserContext } from "@/components/context/user-context";
+import { useContext } from "react";
 
 export default function Home() {
-  const [count, setCount] = useState<number>(0);
-
-  const minus = () => {
-    setCount(count - 1);
-  };
-  const add = () => {
-    setCount(count + 1);
-  };
+  const { user } = useContext(UserContext);
+  console.log("user", user);
 
   return (
     <div className="w-3/4 h-[calc(100vh-290px)] m-auto pt-16 border">
@@ -28,13 +21,13 @@ export default function Home() {
         <div className="flex flex-col w-2/3">
           <h1 className="text-xl font-bold mb-4">Хэрэглэгчийн Хэсэг</h1>
           <span className="border-b w-full "></span>
-          <h1>Овог:</h1>
+          <h1>Овог : {user?.lastname} </h1>
           <input className="bg-[#F1F1F1] rounded-full" type="text" />
-          <h1>Нэр:</h1>
+          <h1>Нэр: {user?.firstname} </h1>
           <input className="bg-[#F1F1F1] rounded-full" type="text" />
-          <h1>Утасны дугаар:</h1>
+          <h1>Утасны дугаар: </h1>
           <input className="bg-[#F1F1F1] rounded-full" type="text" />
-          <h1>Имэйл хаяг:</h1>
+          <h1>Имэйл хаяг: {user?.email} </h1>
           <input className="bg-[#F1F1F1] rounded-full" type="text" />
           <h1>Хаяг:</h1>
           <input className="bg-[#F1F1F1] w-full h-60 rounded-xl" type="text" />

@@ -96,8 +96,6 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         },
       });
       if (res.status === 200) {
-        // console.log("000000000", res.data.cartData.products);
-        // setTableData(res.data.cartData.products);
         let cart = res.data.cartData;
         cart.products = cart.products.map((product: any) => ({
           ...product,
@@ -140,7 +138,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   // const updateCart = (cart) => {};
 
   // console.log("postedData", insertCartData);
-  console.log("Count", count);
+  // console.log("Count", count);
   return (
     <CartContext.Provider
       value={{

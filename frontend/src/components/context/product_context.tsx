@@ -20,9 +20,9 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
     try {
       const res = await axios.get(`${apiUrl}/api/v1/products`);
       if (res.status === 200) {
-        const { product } = res.data;
-        setProduct(product);
-        // console.log("RESDATA", res.data.product);
+        const products = res.data.products;
+        setProduct(products);
+        console.log("RESDATA", res.data.products);
       }
     } catch (error) {
       console.log("cant fetch product lists", error);
