@@ -183,6 +183,7 @@ const ProductDetailPage = () => {
               price={c.price}
               _id={c._id}
               discount={c.discount}
+              image={c.images[0]}
             />
           ))}
         </div>

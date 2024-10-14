@@ -11,6 +11,7 @@ const ProductLists = () => {
         i === 6 || i === 7 ? (
           <div className="col-span-2 row-span-2">
             <ProductCard
+              image={c.images[0]}
               name={c.name}
               price={c.price}
               _id={c._id}
@@ -23,6 +24,7 @@ const ProductLists = () => {
               name={c.name}
               price={c.price}
               _id={c._id}
+              image={c.images[0]}
               discount={c.discount}
             />
           </div>

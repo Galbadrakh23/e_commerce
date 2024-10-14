@@ -77,6 +77,7 @@ export type CardProps = {
   price: number;
   _id: string;
   discount: number;
+  image: string;
 };
 
 export interface ICart {

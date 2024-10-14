@@ -11,12 +11,12 @@ export default function Carousel() {
   return (
     <>
       <Swiper className="mySwiper">
-        <SwiperSlide className="relative">
+        <SwiperSlide className="mx-auto ">
           <div className="absolute left-[200px] bottom-3">
-            {/* <p className="text-lg mb-4">Wild Flower Hoodie</p> */}
-            {/* <p className=" text-4xl font-bold">120’000₮</p> */}
+            <p className="text-lg mb-4">Wild Flower Hoodie</p>
+            <p className=" text-4xl font-bold">120’000₮</p>
           </div>
-          <img src="/assets/hoodies_home.svg" alt="" />
+          <img src="/assets/wildflower.png" alt="" />
         </SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
