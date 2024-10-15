@@ -1,6 +1,6 @@
 "use client";
-import { CategoryLabel } from "@/components/caterogry/index";
-import { SizeLabel } from "@/components/caterogry/size_label";
+import { CategoryLabel } from "@/components/category/index";
+import { SizeLabel } from "@/components/category/size_label";
 import React, { useContext } from "react";
 import { ProductContext } from "@/components/context/product_context";
 import { ProductCard } from "@/components/card/card";
@@ -20,7 +20,7 @@ const CategoryPage = () => {
               price={c.price}
               _id={c._id}
               discount={c.discount}
-              image={c.images[0]}
+              images={c.images}
             />
           ))}
         </main>

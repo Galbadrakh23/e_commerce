@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { ProductContext } from "@/components/context/product_context";
 import { CardProps } from "@/interface";
 
-export function ProductCard({ name, price, _id, discount, image }: CardProps) {
+export function ProductCard({ name, price, _id, discount, images }: CardProps) {
   const { product } = useContext(ProductContext);
 
   const currentPrice = price - Math.floor((price * discount) / 100);
@@ -36,7 +36,7 @@ export function ProductCard({ name, price, _id, discount, image }: CardProps) {
         </Button>
         <Link href={"/" + _id}>
           <img
-            src={image}
+            src={images[0]}
             alt=""
             className="rounded-lg w-full overflow-hidden "
           />

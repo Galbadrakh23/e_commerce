@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { ProductCard } from "@/components/card/card";
 import { ProductContext } from "@/components/context/product_context";
 import ProductDetail from "@/components/product-detail/product-detail";
-import RatingSection from "@/components/caterogry/rating";
+import RatingSection from "@/components/category/rating";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -183,7 +183,7 @@ const ProductDetailPage = () => {
               price={c.price}
               _id={c._id}
               discount={c.discount}
-              image={c.images[0]}
+              images={c.images}
             />
           ))}
         </div>
