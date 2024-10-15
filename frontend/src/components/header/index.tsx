@@ -7,6 +7,7 @@ import { Search, Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/components/context/user-context";
+import SearchModalList from "@/components/search_modal/index";
 
 import {
   DropdownMenu,
@@ -50,12 +51,30 @@ const Header = () => {
             </div>
           </div>
           <div className="relative flex items-center">
-            <Search size={20} className="text-[#FAFAFA] absolute left-4" />
-            <Input
-              type="text"
-              placeholder="Бүтээгдэхүүн хайх"
-              className="rounded-full w-80 pl-12"
-            />
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Search
+                  size={20}
+                  className="text-[#FAFAFA] absolute left-4 top-2.5"
+                />
+                <Input
+                  type="text"
+                  placeholder="Бүтээгдэхүүн хайх"
+                  className="rounded-full w-80 pl-12 text-[#FFFFFF]"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="rounded-xl p-6">
+                <DropdownMenuItem className="focus:bg-transparent">
+                  <SearchModalList />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="focus:bg-transparent">
+                  <SearchModalList />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="focus:bg-transparent">
+                  <SearchModalList />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <div className="pr-10 flex gap-6 items-center justify-center">
@@ -65,7 +84,9 @@ const Header = () => {
               </Link>
             </span>
             <span className="text-[#FFFFFF]">
-              <ShoppingCart />
+              <Link href="/cart">
+                <ShoppingCart />
+              </Link>
             </span>
             {user ? (
               <div className="text-[#FFFFFF] mt-2">
@@ -83,7 +104,7 @@ const Header = () => {
                     <Link href="/saved">
                       <DropdownMenuItem>Wishlist</DropdownMenuItem>
                     </Link>
-                    <Link href="/product_detail">
+                    <Link href="/cart">
                       <DropdownMenuItem>Card</DropdownMenuItem>
                     </Link>
                     <DropdownMenuItem>
