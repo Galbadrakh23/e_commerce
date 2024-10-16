@@ -13,12 +13,12 @@ import StarIcon from "@mui/icons-material/Star";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
-import { Input } from "@/components/ui/input";
 import { CartContext } from "@/components/context/cart_context";
-import { UserContext } from "@/components/context/user-context";
-import { toast } from "react-toastify";
+import { useUser } from "@/components/context/user-context";
+import { toast } from "sonner";
 
 const ProductDetailPage = () => {
+  const { user } = useUser();
   const { product } = useContext(ProductContext);
   const [seeComments, setSeeComments] = useState<boolean>(false);
   const { count, minus, add, cartData, postCartData } = useContext(CartContext);
@@ -38,6 +38,7 @@ const ProductDetailPage = () => {
     discount: 0,
     isNewProduct: true,
   });
+  const [productQuantity, setProductQuantity] = useState(0);
 
   const currentPrice =
     oneProduct.price -
@@ -80,6 +81,22 @@ const ProductDetailPage = () => {
   };
 
   const value = 3.5;
+
+  const addToCart = async () => {
+    try {
+      const response = await axios.post(`${apiUrl}/carts/create-cart`, {
+        userId: user?._id,
+        productId: id,
+        quantity: productQuantity,
+      });
+      if (response.status === 200) {
+        toast.success("Successfully added to cart");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Failed to add to cart");
+    }
+  };
 
   console.log("postedData", insertCartData);
   useEffect(() => {
@@ -137,7 +154,7 @@ const ProductDetailPage = () => {
                 <span className="font-bold">{formattedPrice}₮</span>
               )}
             </div>
-            <Button className="bg-[#2563EB]" size="sm" onClick={postCartData}>
+            <Button className="bg-[#2563EB]" size="sm" onClick={addToCart}>
               Сагсанд нэмэх
             </Button>
           </div>
@@ -183,7 +200,7 @@ const ProductDetailPage = () => {
               price={c.price}
               _id={c._id}
               discount={c.discount}
-              images={c.images}
+              images={c.images[0]}
             />
           ))}
         </div>

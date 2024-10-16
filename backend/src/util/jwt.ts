@@ -6,7 +6,7 @@ const JWT_TOKEN_PASSWORD = process.env.JWT_TOKEN_PASSWORD;
 
 export const generateToken = (payload: object) => {
   return jwt.sign(payload, process.env.JWT_TOKEN_PASSWORD || "", {
-    expiresIn: "10h",
+    expiresIn: "24h",
   });
 };
 

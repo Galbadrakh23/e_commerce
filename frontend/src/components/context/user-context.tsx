@@ -1,11 +1,11 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 import { IUser, UserContextType } from "@/interface";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { User } from "lucide-react";
 
 type UserProviderProps = {
   children: React.ReactNode;
@@ -18,6 +18,7 @@ export const UserContext = createContext<UserContextType>({
     email: "",
     password: "",
     rePassword: "",
+    _id: "",
   },
   token: "",
   setUser: () => {},
@@ -70,4 +71,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       {children}
     </UserContext.Provider>
   );
+};
+export const useUser = () => {
+  return useContext(UserContext);
 };

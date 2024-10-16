@@ -4,6 +4,7 @@ export interface IUser {
   email: string;
   password: string;
   rePassword: string;
+  _id: string;
 }
 
 export interface UserContextType {
@@ -77,7 +78,7 @@ export type CardProps = {
   price: number;
   _id: string;
   discount: number;
-  images: string[];
+  images: string;
 };
 
 export type WishListProps = {
