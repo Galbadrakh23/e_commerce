@@ -7,6 +7,7 @@ import categoryRoute from "./routes/category-routes";
 import productRoute from "./routes/product-route";
 import cartRoute from "./routes/cart-routes";
 import userRoute from "./routes/user-route";
+import wishlistRoute from "./routes/wishlist-route";
 import { connectDB } from "./config/db";
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1", categoryRoute);
 app.use("/api/v1", productRoute);
 app.use("/api/v1/carts", cartRoute);
+app.use("api/v1/wishlist", wishlistRoute);
 
 const PORT: string = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";

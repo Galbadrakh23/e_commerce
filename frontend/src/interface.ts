@@ -78,7 +78,7 @@ export type CardProps = {
   price: number;
   _id: string;
   discount: number;
-  images: string;
+  image: string | any;
 };
 
 export type WishListProps = {

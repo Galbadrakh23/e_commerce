@@ -12,7 +12,7 @@ import { authentication } from "../middlewares/auth";
 
 const router = Router();
 
-router.route("/get-cart").get(getAllUserCart);
+// router.route("/get-cart").get(getAllUserCart);
 router.route("/create-cart").post(createCart); // update
 router.route("/get-cart").get(authentication, getCartData);
 router.route("/update-cart").put(authentication, updateCart);

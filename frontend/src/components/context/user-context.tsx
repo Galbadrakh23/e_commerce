@@ -5,7 +5,6 @@ import axios from "axios";
 import { apiUrl } from "@/utils/util";
 import { IUser, UserContextType } from "@/interface";
 import { useRouter } from "next/navigation";
-import { User } from "lucide-react";
 
 type UserProviderProps = {
   children: React.ReactNode;

@@ -17,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
@@ -26,6 +27,7 @@ const Header = () => {
     localStorage.removeItem("token");
     setUser(null);
     router.push("/login");
+    toast.warning("Successfully log out");
   };
 
   return (

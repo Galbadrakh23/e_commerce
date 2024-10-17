@@ -200,7 +200,7 @@ const ProductDetailPage = () => {
               price={c.price}
               _id={c._id}
               discount={c.discount}
-              images={c.images[0]}
+              image={c.images[0]}
             />
           ))}
         </div>
